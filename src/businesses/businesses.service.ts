@@ -2,9 +2,9 @@ import { ConflictException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { BusinessEntity } from "../entities/business.entity";
 import { Repository } from "typeorm";
-import { CreateBusinessDto } from "../../data/dto/create-business.dto";
 import { BusinessStatus } from "../enums/business-status.enum";
 import { randomBytes } from "crypto";
+import { CreateBusinessDto } from "../../data/dto";
 
 @Injectable()
 export class BusinessesService {
@@ -33,6 +33,12 @@ export class BusinessesService {
     });
 
     return this.businessRepo.save(business);
+  }
+
+  async findByApiKey(apiKey: string): Promise<BusinessEntity | null> {
+    return await this.businessRepo.findOne({
+      where: { apiKey },
+    });
   }
 
   // Helper Methods
