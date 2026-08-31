@@ -4,7 +4,9 @@ import { AppService } from "./app.service";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { BusinessesModule } from "./businesses/businesses.module";
-import { CustomersModule } from './customers/customers.module';
+import { CustomersModule } from "./customers/customers.module";
+import { WalletsModule } from "./wallets/wallets.module";
+import { TransactionsModule } from './transactions/transactions.module';
 
 @Module({
   imports: [
@@ -25,6 +27,10 @@ import { CustomersModule } from './customers/customers.module';
     BusinessesModule,
 
     CustomersModule,
+
+    WalletsModule,
+
+    TransactionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
