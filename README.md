@@ -81,3 +81,6 @@ GET    /v1/wallets/:id/transactions
 ## Status
 
 🚧 MVP in development.
+
+- hash apikey on db
+- implement transfers

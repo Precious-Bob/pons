@@ -12,6 +12,7 @@ import type { AuthenticatedReq } from "../types/authenticated-req";
 import { ApiKeyGuard } from "../guards/api-key.guard";
 import { CreateWalletDto } from "../dto/wallet/create-wallet.dto";
 import { FundWalletDto } from "../dto/wallet/fund-wallet.dto";
+import { DebitWalletDto } from "../dto/wallet/debit-wallet.dto";
 
 @Controller("wallets")
 @UseGuards(ApiKeyGuard)
@@ -30,6 +31,15 @@ export class WalletsController {
     @Body() dto: FundWalletDto,
   ) {
     return this.walletsService.fund(request.business, id, dto);
+  }
+
+  @Post(":id/debit")
+  debit(
+    @Req() request: AuthenticatedReq,
+    @Param("id") id: string,
+    @Body() dto: DebitWalletDto,
+  ) {
+    return this.walletsService.debit(request.business, id, dto);
   }
 
   @Get(":id/transactions")
