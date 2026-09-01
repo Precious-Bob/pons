@@ -4,7 +4,7 @@ import { BusinessEntity } from "../entities/business.entity";
 import { Repository } from "typeorm";
 import { BusinessStatus } from "../enums/business-status.enum";
 import { randomBytes } from "crypto";
-import { CreateBusinessDto } from "../../data/dto";
+import { CreateBusinessDto } from "../dto";
 
 @Injectable()
 export class BusinessesService {

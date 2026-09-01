@@ -8,13 +8,13 @@ import { DataSource, Repository } from "typeorm";
 import { WalletEntity } from "../entities/wallet.entity";
 import { CustomersService } from "../customers/customers.service";
 import { BusinessEntity } from "../entities/business.entity";
-import { CreateWalletDto } from "../../data/dto/wallet/create-wallet.dto";
 import { TransactionEntity } from "../entities/transaction.entity";
 import { WalletStatus } from "../enums";
-import { FundWalletDto } from "../../data/dto/wallet/fund-wallet.dto";
 import { TransactionType } from "../enums/transaction-type.enum";
-import { DebitWalletDto } from "../../data/dto/wallet/debit-wallet.dto";
 import { TransactionsService } from "../transactions/transactions.service";
+import { CreateWalletDto } from "../dto/wallet/create-wallet.dto";
+import { FundWalletDto } from "../dto/wallet/fund-wallet.dto";
+import { DebitWalletDto } from "../dto/wallet/debit-wallet.dto";
 
 @Injectable()
 export class WalletsService {

@@ -8,9 +8,9 @@ import {
   UseGuards,
 } from "@nestjs/common";
 import { CustomersService } from "./customers.service";
-import { CreateCustomerDto } from "../../data/dto";
 import type { AuthenticatedReq } from "../types/authenticated-req";
 import { ApiKeyGuard } from "../guards/api-key.guard";
+import { CreateCustomerDto } from "../dto";
 
 @Controller("customers")
 @UseGuards(ApiKeyGuard)

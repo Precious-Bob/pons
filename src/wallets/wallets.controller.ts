@@ -9,9 +9,9 @@ import {
 } from "@nestjs/common";
 import { WalletsService } from "./wallets.service";
 import type { AuthenticatedReq } from "../types/authenticated-req";
-import { CreateWalletDto } from "../../data/dto/wallet/create-wallet.dto";
 import { ApiKeyGuard } from "../guards/api-key.guard";
-import { FundWalletDto } from "../../data/dto/wallet/fund-wallet.dto";
+import { CreateWalletDto } from "../dto/wallet/create-wallet.dto";
+import { FundWalletDto } from "../dto/wallet/fund-wallet.dto";
 
 @Controller("wallets")
 @UseGuards(ApiKeyGuard)
