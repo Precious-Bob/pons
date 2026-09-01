@@ -1,5 +1,5 @@
 import { IsEnum, IsUUID } from "class-validator";
-import { Currency } from "../../src/enums";
+import { Currency } from "../../../src/enums";
 
 export class CreateWalletDto {
   @IsUUID()
