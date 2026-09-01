@@ -1,93 +1,83 @@
 # Pons
 
-> **A simulated inter-fintech wallet routing service built with NestJS.**
+A minimal financial infrastructure API built with **NestJS, TypeORM, and SQLite**.
 
-## Overview
+Pons is a simulation of [ThePeer](https://thepeer.co/), designed to model core financial infrastructure features such as customer management, wallet creation, and wallet transactions through an authenticated API.
 
-**Pons** is Latin for _"bridge"_—a fitting name for a platform that connects independent wallet systems. Inspired by African fintech infrastructure companies like **Thepeer**, Pons is an educational simulation that demonstrates how an intermediary service can coordinate wallet-to-wallet transfers between separate financial systems.
+Pons allows businesses to manage customers, create wallets, and perform basic wallet transactions through an authenticated API.
 
-Rather than processing real money, Pons recreates the backend engineering challenges involved in building payment infrastructure, including transaction consistency, idempotency, asynchronous communication, and failure recovery.
+## Functional Requirements
 
-## The Problem
+- Business API-key authentication
+- Customer creation and management
+- Customer-to-business ownership
+- Wallet creation per customer and currency
+- Wallet funding
+- Wallet debiting
+- Insufficient-balance protection
+- Transaction history
+- Transaction references for idempotency
+- Business-level resource isolation
 
-Digital wallets often exist as isolated ecosystems. If a user has funds in one wallet provider and wants to send money to someone using another provider, those systems need a reliable way to communicate.
-
-Pons simulates that infrastructure layer by acting as a bridge between multiple independent wallet providers.
-
-## How It Works
-
-Pons sits between three simulated fintech providers—**PayA**, **PayB**, and **PayC**—and routes transfers between them while maintaining a consistent and auditable transaction history.
+## Core Entities
 
 ```text
-                Pons
+Business
+   │
+   └── Customer
+          │
+          └── Wallet
                  │
-      ┌──────────┼──────────┐
-      ▼          ▼          ▼
-    PayA       PayB       PayC
+                 └── Transaction
 ```
 
-Each provider has its own users and wallets, while Pons coordinates cross-provider transfers through a unified API.
+### Business
 
-## Core Features
+Represents a business using the Pons API.
 
-- Simulated wallet providers (PayA, PayB, PayC)
-- Cross-provider wallet transfers
-- Double-entry ledger for auditable money movement
-- Idempotency keys to prevent duplicate transfers
-- Transaction state management
-- Webhook delivery for provider notifications
-- Retry mechanisms for failed webhook deliveries
-- Reconciliation jobs for stuck or uncertain transfers
-- Failure injection for testing timeout and recovery scenarios
+### Customer
+
+Represents a customer belonging to a business.
+
+### Wallet
+
+Stores a customer's balance and currency.
+
+### Transaction
+
+Records money movement into or out of a wallet.
+
+## Core API
+
+```text
+POST   /v1/customers
+GET    /v1/customers/:id
+
+POST   /v1/wallets
+GET    /v1/wallets/:id
+
+POST   /v1/wallets/:id/fund
+POST   /v1/wallets/:id/debit
+
+GET    /v1/wallets/:id/transactions
+```
+
+## Design Principles
+
+- Money stored as integer minor units (e.g. kobo)
+- Wallet balance and transaction records updated atomically
+- Transaction references are unique
+- Business resources are isolated from other businesses
+- Financial transactions are treated as immutable records
 
 ## Tech Stack
 
-- **NestJS** — Backend framework
-- **TypeScript** — Primary language
-- **SQLite** — Relational database for the simulation
-- **TypeORM** — ORM and migrations
-- **Redis** — Queue backing store
-- **BullMQ** — Background jobs, webhooks, and retries
-- **Swagger** — API documentation
-- **Jest** — Testing
+- **NestJS**
+- **TypeScript**
+- **TypeORM**
+- **SQLite**
+- **class-validator**
 
-## Learning Goals
+## Status
 
-Pons is designed as a backend engineering project focused on concepts commonly found in payment infrastructure, including:
-
-- Transaction consistency
-- Double-entry accounting
-- Idempotency
-- Asynchronous processing
-- Webhooks
-- Retry strategies
-- Distributed system reliability
-- Reconciliation workflows
-
-## Project Scope
-
-Pons is **not** a production payment platform.
-
-It does **not** integrate with real banks, fintech APIs, or payment gateways. Instead, it provides a safe environment for exploring the architectural patterns behind modern payment infrastructure.
-
-## Getting Started
-
-```bash
-# Clone the repository
-git clone <repository-url>
-
-# Install dependencies
-pnpm install
-
-# Run database migrations
-pnpm migration:run
-
-# Start the development server
-pnpm start:dev
-```
-
-Once running, the API documentation will be available through Swagger.
-
-## License
-
-MIT
+🚧 MVP in development.
